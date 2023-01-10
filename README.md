@@ -2,5 +2,6 @@
 ***WIP***
 
 ## Prerequisites
-Install json-c
+Install json-c:
+
 `brew install json-c`
