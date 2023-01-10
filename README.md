@@ -2,6 +2,8 @@
 ***WIP***
 
 ## Prerequisites
-Install json-c with [homebrew](https://formulae.brew.sh/formula/json-c):
+Install json-c with [homebrew][json-c_homebrew]:
 
 `brew install json-c`
+
+[json-c_homebrew]: https://formulae.brew.sh/formula/json-c
