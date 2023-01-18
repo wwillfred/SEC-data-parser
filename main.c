@@ -56,7 +56,7 @@ int main(int argc, char **argv) {
 	parsed_json = json_tokener_parse(buffer);
 	printf("just parsed the json input:\n");
 	
-	printf("%.4194304s", json_object_to_json_string_ext(parsed_json, JSON_C_TO_STRING_PRETTY));
+	puts(json_object_to_json_string_ext(parsed_json, JSON_C_TO_STRING_PRETTY));
 	
 	json_object_put(parsed_json);
 
