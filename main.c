@@ -1,9 +1,9 @@
-#include<stdio.h>
+#include <stdio.h>
+#include <json-c/json.h>
 #include <unistd.h>
 #include <limits.h>
-#include <json-c/json.h>
 #include <string.h>
-#include <stdlib.h>
+// #include <stdlib.h>
 
 int main(int argc, char **argv) {
 	FILE *fp;
