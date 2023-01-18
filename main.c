@@ -2,31 +2,16 @@
 #include <json-c/json.h>
 
 int main(int argc, char **argv) {
-	FILE *fp;
-
-	char buffer[4194304];
 
 	char relativePathName[] = "sec-data/companyfacts/CIK0000001750.json";
 
-	struct json_object *parsed_json;
+	struct json_object *root = json_object_from_file(relativePathName);
 
-	fp = fopen(relativePathName, "r");
-
-	if (fp==NULL)
-	{
-	   printf("File could not be opened\n");
-	   exit(0);
-	}
-
-	fread(buffer, 4194304, 1, fp);
-	fclose(fp);
-
-	parsed_json = json_tokener_parse(buffer);
 	printf("here is the parsed json file:\n");
 	
-	puts(json_object_to_json_string_ext(parsed_json, JSON_C_TO_STRING_PRETTY));
+	puts(json_object_to_json_string_ext(root, JSON_C_TO_STRING_PRETTY));
 	
-	json_object_put(parsed_json);
+	json_object_put(root);
 
 	return 0;
 
