@@ -38,7 +38,7 @@ int main(int argc, char **argv) {
 	struct json_object *parsed_json;
 
 	printf("Attempting to open file...\n");
-	fp = fopen("big.json", "r");
+	fp = fopen(completePathName, "r");
 
 
 	if (fp==NULL)
