@@ -3,6 +3,7 @@
 
 #Specific for Mac OS
 .DS_Store
+*.swp
 
 # Prerequisites
 *.d
