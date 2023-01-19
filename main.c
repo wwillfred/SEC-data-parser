@@ -10,16 +10,20 @@ int main(int argc, char **argv) {
 	   return 1;
 	}
 
-	json_object *facts, *us_gaap, *netIncomeLoss;
+	json_object *facts, *us_gaap, *netIncomeLoss, *units, *USD;
 	const char key_facts[] = "facts";
 	const char key_us_gaap[] = "us-gaap";
 	const char key_netIncomeLoss[] = "NetIncomeLoss";
+	const char key_units[] = "units";
+	const char key_USD[] = "USD";
 
 	json_object_object_get_ex(root, key_facts, &facts);
 	json_object_object_get_ex(facts, key_us_gaap, &us_gaap);
 	json_object_object_get_ex(us_gaap, key_netIncomeLoss, &netIncomeLoss);
+	json_object_object_get_ex(netIncomeLoss, key_units, &units);
+	json_object_object_get_ex(units, key_USD, &USD);
 
-	printf("the object from key %s is: %s\n", key_netIncomeLoss, json_object_get_string(netIncomeLoss));	
+	printf("the object from key %s is: %s\n", key_USD, json_object_get_string(USD));	
 
 	json_object_put(root);
 
