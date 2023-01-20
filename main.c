@@ -23,7 +23,15 @@ int main(int argc, char **argv) {
 	json_object_object_get_ex(netIncomeLoss, key_units, &units);
 	json_object_object_get_ex(units, key_USD, &USD);
 
-	printf("the object from key %s is: %s\n", key_USD, json_object_get_string(USD));	
+	const char *str;
+	int n = json_object_array_length(USD);
+	for (int i=0; i<n; i++)
+	{
+	   str = json_object_get_string(json_object_array_get_idx(USD, i));
+	   printf("The value at %i position is: %s\n", i, str);
+	}
+
+	//printf("the object from key %s is: %s\n", key_USD, json_object_get_string(USD));	
 
 	json_object_put(root);
 
