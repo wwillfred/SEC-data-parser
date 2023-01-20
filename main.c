@@ -10,12 +10,15 @@ int main(int argc, char **argv) {
 	   return 1;
 	}
 
-	json_object *facts, *us_gaap, *netIncomeLoss, *units, *USD;
+	json_object *facts, *us_gaap, *netIncomeLoss, *units, *USD, *val, *fy, *fp;
 	const char key_facts[] = "facts";
 	const char key_us_gaap[] = "us-gaap";
 	const char key_netIncomeLoss[] = "NetIncomeLoss";
 	const char key_units[] = "units";
 	const char key_USD[] = "USD";
+	const char key_val[] = "val";
+	const char key_fy[] = "fy";
+	const char key_fp[] = "fp";
 
 	json_object_object_get_ex(root, key_facts, &facts);
 	json_object_object_get_ex(facts, key_us_gaap, &us_gaap);
@@ -27,8 +30,11 @@ int main(int argc, char **argv) {
 	int n = json_object_array_length(USD);
 	for (int i=0; i<n; i++)
 	{
-	   str = json_object_get_string(json_object_array_get_idx(USD, i));
-	   printf("The value at %i position is: %s\n", i, str);
+	   struct json_object *it = json_object_array_get_idx(USD, i);
+	   json_object_object_get_ex(it, key_val, &val);
+	   json_object_object_get_ex(it, key_fy, &fy);
+	   json_object_object_get_ex(it, key_fp, &fp);
+	   printf("Net income in %s of %s was %s\n", json_object_get_string(fp), json_object_get_string(fy), json_object_get_string(val));
 	}
 
 	//printf("the object from key %s is: %s\n", key_USD, json_object_get_string(USD));	
