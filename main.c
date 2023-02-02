@@ -11,7 +11,7 @@ int main(int argc, char **argv) {
 	   return 1;
 	}
 
-	json_object *facts, *us_gaap, *netIncomeLoss, *units, *USD, *val, *fy, *fp, *frame;
+	json_object *facts, *us_gaap, *netIncomeLoss, *units, *USD, *val, *fy, *fp, *it, *frame;
 	const char key_facts[] = "facts";
 	const char key_us_gaap[] = "us-gaap";
 	const char key_netIncomeLoss[] = "NetIncomeLoss";
@@ -30,20 +30,18 @@ int main(int argc, char **argv) {
 
 	const char *str;
 	int n = json_object_array_length(USD);
+
+	int quarterValue[4];
+
 	for (int i=0; i<n; i++)
 	{
-	   struct json_object *it = json_object_array_get_idx(USD, i);
-
-	   if (json_object_object_get_ex(it, key_frame, &frame))
-	   {
-	      if (strpbrk(json_object_get_string(frame), "Q"))
-	      {   
-	         json_object_object_get_ex(it, key_val, &val);
-	         json_object_object_get_ex(it, key_fy, &fy);
-	         json_object_object_get_ex(it, key_fp, &fp);
-	         printf("Net income in %s of %s was %s\n", json_object_get_string(fp), json_object_get_string(fy), json_object_get_string(val));
-	      }
-	   }
+	  it = json_object_array_get_idx(USD, i);
+	  json_object_object_get_ex(it, key_frame, &frame);
+	  const char *frameString = json_object_get_string(frame);
+	  /* if frameString has Q in its value*/
+	    /* int tempQuarter = the value after Q in frameString */
+	    /* if the tempQuarter-minus-one-th index in the qarterValue array is not null, then log a warning */
+	    /* take tempQuarter and put it in the ith-minus-one index in the quarter array */
 	}
 
 	//printf("the object from key %s is: %s\n", key_USD, json_object_get_string(USD));	
