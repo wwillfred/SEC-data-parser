@@ -31,17 +31,25 @@ int main(int argc, char **argv) {
 	const char *str;
 	int n = json_object_array_length(USD);
 
-	int quarterValue[4];
+	int quarterValues[4];
 
 	for (int i=0; i<n; i++)
 	{
 	  it = json_object_array_get_idx(USD, i);
 	  json_object_object_get_ex(it, key_frame, &frame);
+	  if (!frame) continue;
+
 	  const char *frameString = json_object_get_string(frame);
-	  /* if frameString has Q in its value*/
-	    /* int tempQuarter = the value after Q in frameString */
-	    /* if the tempQuarter-minus-one-th index in the qarterValue array is not null, then log a warning */
+	  /* int tempYear = the four digits after the "CY" in frameString */
+
+	  /* if frameString matches regex CY[0-9][0-9][0-9][0-9]Q[1-4]*/
+	    /* int tempQuarter = the value after the "Q" in frameString */
+
+	    /* if the tempQuarter-minus-one-th index in the qarterValues array is not null, then log a warning */
 	    /* take tempQuarter and put it in the ith-minus-one index in the quarter array */
+	    /* print a statement saying that the net income of tempQuarter quarter of tempYear year is quarterValues[tempQuarter minus 1]*/ 
+	  /* else if frameString matches regex CY[0-9][0-9][0-9][0-9] */
+	    /* tempYear = the four digits after "CY" in frameString */
 	}
 
 	//printf("the object from key %s is: %s\n", key_USD, json_object_get_string(USD));	
