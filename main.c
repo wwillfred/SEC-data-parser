@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <json-c/json.h>
 #include <string.h>
+#include <time.h>
 
 int main(int argc, char **argv) {
 
@@ -11,7 +12,7 @@ int main(int argc, char **argv) {
 	   return 1;
 	}
 
-	json_object *facts, *us_gaap, *netIncomeLoss, *units, *USD, *val, *fy, *fp, *it, *frame;
+	json_object *facts, *us_gaap, *netIncomeLoss, *units, *USD, *val, *fy, *fp, *it, *start, *end;
 	const char key_facts[] = "facts";
 	const char key_us_gaap[] = "us-gaap";
 	const char key_netIncomeLoss[] = "NetIncomeLoss";
@@ -20,7 +21,8 @@ int main(int argc, char **argv) {
 	const char key_val[] = "val";
 	const char key_fy[] = "fy";
 	const char key_fp[] = "fp";
-	const char key_frame[] = "frame";
+	const char key_start[] = "start";
+	const char key_end[] = "end";
 
 	json_object_object_get_ex(root, key_facts, &facts);
 	json_object_object_get_ex(facts, key_us_gaap, &us_gaap);
@@ -32,24 +34,24 @@ int main(int argc, char **argv) {
 	int n = json_object_array_length(USD);
 
 	int quarterValues[4];
-
+	
+	struct tm tm_start;
+	struct tm tm_end;
+	char *buf_start;
+	char *buf_end;
+	
 	for (int i=0; i<n; i++)
 	{
 	  it = json_object_array_get_idx(USD, i);
-	  json_object_object_get_ex(it, key_frame, &frame);
-	  if (!frame) continue;
+	  json_object_object_get_ex(it, key_start, &start);
+	  buf_start = strdup(json_object_get_string(start));
+          strptime(buf_start, "%Y-%m-%d", &tm_start);
 
-	  const char *frameString = json_object_get_string(frame);
-	  /* int tempYear = the four digits after the "CY" in frameString */
+	  json_object_object_get_ex(it, key_end, &end);
+	  buf_end = strdup(json_object_get_string(end));
+	  strptime(buf_end, "%Y-%m-%d", &tm_end);
 
-	  /* if frameString matches regex CY[0-9][0-9][0-9][0-9]Q[1-4]*/
-	    /* int tempQuarter = the value after the "Q" in frameString */
-
-	    /* if the tempQuarter-minus-one-th index in the qarterValues array is not null, then log a warning */
-	    /* take tempQuarter and put it in the ith-minus-one index in the quarter array */
-	    /* print a statement saying that the net income of tempQuarter quarter of tempYear year is quarterValues[tempQuarter minus 1]*/ 
-	  /* else if frameString matches regex CY[0-9][0-9][0-9][0-9] */
-	    /* tempYear = the four digits after "CY" in frameString */
+	  printf("The period starts on %s and ends on %s\n", buf_start, buf_end);
 	}
 
 	//printf("the object from key %s is: %s\n", key_USD, json_object_get_string(USD));	
