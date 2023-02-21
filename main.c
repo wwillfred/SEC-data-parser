@@ -1,8 +1,4 @@
-#include <stdio.h>
-#include <json-c/json.h>
-#include <string.h>
-#include <time.h>
-
+#include "main.h"
 
 void iterateThroughQuarters(json_object *obj)
 {
