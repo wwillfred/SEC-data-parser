@@ -6,9 +6,11 @@
 	const char key_units[] = "units";
 	const char key_USD[] = "USD";
 
+
+	json_object *facts, *us_gaap, *netIncomeLoss, *units, *USD, *val, *fy, *fp;
+
 int main(int argc, char **argv) {
 
-	const int anInt = 5;
 	char relativePathName[] = "sec-data/companyfacts/CIK0000001750.json";
 	struct json_object *root = json_object_from_file(relativePathName);
 	if (!root) {
@@ -16,13 +18,7 @@ int main(int argc, char **argv) {
 	   return 1;
 	}
 
-	json_object *facts, *us_gaap, *netIncomeLoss, *units, *USD, *val, *fy, *fp;
-
-	json_object_object_get_ex(root, key_facts, &facts);
-	json_object_object_get_ex(facts, key_us_gaap, &us_gaap);
-	json_object_object_get_ex(us_gaap, key_netIncomeLoss, &netIncomeLoss);
-	json_object_object_get_ex(netIncomeLoss, key_units, &units);
-	json_object_object_get_ex(units, key_USD, &USD);
+	getIterationArray(root);
 
 	iterateThroughQuarters(USD);
 
@@ -34,6 +30,16 @@ int main(int argc, char **argv) {
 
 }
 
+void getIterationArray(json_object *root)
+{
+
+	json_object_object_get_ex(root, key_facts, &facts);
+	json_object_object_get_ex(facts, key_us_gaap, &us_gaap);
+	json_object_object_get_ex(us_gaap, key_netIncomeLoss, &netIncomeLoss);
+	json_object_object_get_ex(netIncomeLoss, key_units, &units);
+	json_object_object_get_ex(units, key_USD, &USD);
+
+}
 void iterateThroughQuarters(json_object *obj)
 {
 

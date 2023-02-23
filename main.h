@@ -8,6 +8,8 @@
 
 int main(int argc, char **argv);
 
+void getIterationArray();
+
 void iterateThroughQuarters(json_object *obj);
 
 #endif // _MAIN_H_
