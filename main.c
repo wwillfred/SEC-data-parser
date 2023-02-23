@@ -1,34 +1,5 @@
 #include "main.h"
 
-void iterateThroughQuarters(json_object *obj)
-{
-
-	json_object *it, *start, *end;
-
-	const char key_start[] = "start";
-	const char key_end[] = "end";
-	
-	int n = json_object_array_length(obj);
-
-	struct tm tm_start;
-	struct tm tm_end;
-	char *buf_start;
-	char *buf_end;
-	
-	for (int i=0; i<n; i++)
-	{
-	  it = json_object_array_get_idx(obj, i);
-	  json_object_object_get_ex(it, key_start, &start);
-	  buf_start = strdup(json_object_get_string(start));
-          strptime(buf_start, "%Y-%m-%d", &tm_start);
-
-	  json_object_object_get_ex(it, key_end, &end);
-	  buf_end = strdup(json_object_get_string(end));
-	  strptime(buf_end, "%Y-%m-%d", &tm_end);
-
-	  printf("The period starts on %s and ends on %s\n", buf_start, buf_end);
-	}
-}
 
 int main(int argc, char **argv) {
 
@@ -65,3 +36,32 @@ int main(int argc, char **argv) {
 
 }
 
+void iterateThroughQuarters(json_object *obj)
+{
+
+	json_object *it, *start, *end;
+
+	const char key_start[] = "start";
+	const char key_end[] = "end";
+	
+	int n = json_object_array_length(obj);
+
+	struct tm tm_start;
+	struct tm tm_end;
+	char *buf_start;
+	char *buf_end;
+	
+	for (int i=0; i<n; i++)
+	{
+	  it = json_object_array_get_idx(obj, i);
+	  json_object_object_get_ex(it, key_start, &start);
+	  buf_start = strdup(json_object_get_string(start));
+          strptime(buf_start, "%Y-%m-%d", &tm_start);
+
+	  json_object_object_get_ex(it, key_end, &end);
+	  buf_end = strdup(json_object_get_string(end));
+	  strptime(buf_end, "%Y-%m-%d", &tm_end);
+
+	  printf("The period starts on %s and ends on %s\n", buf_start, buf_end);
+	}
+}
