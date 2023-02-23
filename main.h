@@ -6,8 +6,8 @@
 #include <string.h>
 #include <time.h>
 
-void iterateThroughQuarters(json_object *obj);
-
 int main(int argc, char **argv);
+
+void iterateThroughQuarters(json_object *obj);
 
 #endif // _MAIN_H_

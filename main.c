@@ -1,8 +1,14 @@
 #include "main.h"
 
+	const char key_facts[] = "facts";
+	const char key_us_gaap[] = "us-gaap";
+	const char key_netIncomeLoss[] = "NetIncomeLoss";
+	const char key_units[] = "units";
+	const char key_USD[] = "USD";
 
 int main(int argc, char **argv) {
 
+	const int anInt = 5;
 	char relativePathName[] = "sec-data/companyfacts/CIK0000001750.json";
 	struct json_object *root = json_object_from_file(relativePathName);
 	if (!root) {
@@ -11,14 +17,6 @@ int main(int argc, char **argv) {
 	}
 
 	json_object *facts, *us_gaap, *netIncomeLoss, *units, *USD, *val, *fy, *fp;
-	const char key_facts[] = "facts";
-	const char key_us_gaap[] = "us-gaap";
-	const char key_netIncomeLoss[] = "NetIncomeLoss";
-	const char key_units[] = "units";
-	const char key_USD[] = "USD";
-	const char key_val[] = "val";
-	const char key_fy[] = "fy";
-	const char key_fp[] = "fp";
 
 	json_object_object_get_ex(root, key_facts, &facts);
 	json_object_object_get_ex(facts, key_us_gaap, &us_gaap);
