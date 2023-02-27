@@ -6,6 +6,12 @@
 #include <string.h>
 #include <time.h>
 
+const char key_facts[] = "facts";
+const char key_us_gaap[] = "us-gaap";
+const char key_netIncomeLoss[] = "NetIncomeLoss";
+const char key_units[] = "units";
+const char key_USD[] = "USD";
+
 int main(int argc, char **argv);
 
 void getIterationArray();

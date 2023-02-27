@@ -1,12 +1,5 @@
 #include "main.h"
 
-	const char key_facts[] = "facts";
-	const char key_us_gaap[] = "us-gaap";
-	const char key_netIncomeLoss[] = "NetIncomeLoss";
-	const char key_units[] = "units";
-	const char key_USD[] = "USD";
-
-
 	json_object *facts, *us_gaap, *netIncomeLoss, *units, *USD, *val, *fy, *fp;
 
 int main(int argc, char **argv) {
