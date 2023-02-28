@@ -4,12 +4,7 @@
 
 int main(int argc, char **argv) {
 
-	char relativePathName[] = "sec-data/companyfacts/CIK0000001750.json";
-	struct json_object *root = json_object_from_file(relativePathName);
-	if (!root) {
-	   printf("error, file %s not found\n", relativePathName);
-	   return 1;
-	}
+	struct json_object *root = getRootJSON();
 
 	getIterationArray(root);
 
@@ -23,8 +18,18 @@ int main(int argc, char **argv) {
 
 }
 
-void getIterationArray(json_object *root)
-{
+json_object* getRootJSON() {
+	char relativePathName[] = "sec-data/companyfacts/CIK0000001750.json";
+	struct json_object *root = json_object_from_file(relativePathName);
+	if (!root) {
+	   printf("error, file %s not found\n", relativePathName);
+	   /* how to return an error? */ 
+	}
+	return root;
+}
+
+void getIterationArray(json_object *root) {
+
 
 	json_object_object_get_ex(root, key_facts, &facts);
 	json_object_object_get_ex(facts, key_us_gaap, &us_gaap);
@@ -33,8 +38,8 @@ void getIterationArray(json_object *root)
 	json_object_object_get_ex(units, key_USD, &USD);
 
 }
-void iterateThroughQuarters(json_object *obj)
-{
+void iterateThroughQuarters(json_object *obj) {
+
 
 	json_object *it, *start, *end;
 

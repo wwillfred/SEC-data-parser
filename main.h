@@ -14,7 +14,9 @@ const char key_USD[] = "USD";
 
 int main(int argc, char **argv);
 
-void getIterationArray();
+json_object* getRootJSON();
+
+void getIterationArray(json_object *root);
 
 void iterateThroughQuarters(json_object *obj);
 
