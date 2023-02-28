@@ -4,7 +4,7 @@
 
 int main(int argc, char **argv) {
 
-	struct json_object *root = getRootJSON();
+	json_object *root = getRootJSON();
 
 	getIterationArray(root);
 
