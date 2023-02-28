@@ -23,7 +23,7 @@ json_object* getRootJSON() {
 	struct json_object *root = json_object_from_file(relativePathName);
 	if (!root) {
 	   printf("error, file %s not found\n", relativePathName);
-	   /* how to return an error? */ 
+	   // how to return an error? 
 	}
 	return root;
 }
