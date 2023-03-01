@@ -5,6 +5,8 @@
 int main(int argc, char **argv) {
 
 	json_object *root = getRootJSON();
+	if (!root)
+	  return 1;
 
 	getIterationArray(root);
 
@@ -15,15 +17,14 @@ int main(int argc, char **argv) {
 	json_object_put(root);
 
 	return 0;
-
 }
 
 json_object* getRootJSON() {
 	char relativePathName[] = "sec-data/companyfacts/CIK0000001750.json";
 	struct json_object *root = json_object_from_file(relativePathName);
 	if (!root) {
-	   printf("error, file %s not found\n", relativePathName);
-	   // how to return an error? 
+	  printf("error, file %s not found\n", relativePathName);
+	  return NULL;
 	}
 	return root;
 }
