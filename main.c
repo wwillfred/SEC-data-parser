@@ -1,6 +1,5 @@
 #include "main.h"
 
-
 int main(int argc, char **argv) {
 
 	json_object *root = getRootJSON();
@@ -8,6 +7,8 @@ int main(int argc, char **argv) {
 	  return 1;
 
 	json_object *iterationArray = getIterationArray(root);
+	if (!iterationArray)
+	  return 1;
 
 	iterateThroughQuarters(iterationArray);
 
@@ -37,6 +38,8 @@ json_object* getIterationArray(json_object *root) {
 	json_object_object_get_ex(us_gaap, key_netIncomeLoss, &netIncomeLoss);
 	json_object_object_get_ex(netIncomeLoss, key_units, &units);
 	json_object_object_get_ex(units, key_USD, &USD);
+	
+	//TO-DO: need to check that USD is actually an array
 	if (!USD) {
 	  printf("error, could not find iteration array\n");
 	  return NULL;
