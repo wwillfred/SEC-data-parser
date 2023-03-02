@@ -16,7 +16,7 @@ int main(int argc, char **argv);
 
 json_object* getRootJSON();
 
-void getIterationArray(json_object *root);
+json_object* getIterationArray(json_object *root);
 
 void iterateThroughQuarters(json_object *obj);
 

@@ -8,7 +8,7 @@ int main(int argc, char **argv) {
 	if (!root)
 	  return 1;
 
-	getIterationArray(root);
+	json_object *iterationArray = getIterationArray(root);
 
 	iterateThroughQuarters(USD);
 
@@ -29,16 +29,20 @@ json_object* getRootJSON() {
 	return root;
 }
 
-void getIterationArray(json_object *root) {
-
+json_object* getIterationArray(json_object *root) {
 
 	json_object_object_get_ex(root, key_facts, &facts);
 	json_object_object_get_ex(facts, key_us_gaap, &us_gaap);
 	json_object_object_get_ex(us_gaap, key_netIncomeLoss, &netIncomeLoss);
 	json_object_object_get_ex(netIncomeLoss, key_units, &units);
 	json_object_object_get_ex(units, key_USD, &USD);
-
+	if (!USD) {
+	  printf("error, could not find iteration array\n");
+	  return NULL;
+	}
+	return USD;
 }
+
 void iterateThroughQuarters(json_object *obj) {
 
 
