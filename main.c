@@ -1,6 +1,5 @@
 #include "main.h"
 
-	json_object *facts, *us_gaap, *netIncomeLoss, *units, *USD, *val, *fy, *fp;
 
 int main(int argc, char **argv) {
 
@@ -10,7 +9,7 @@ int main(int argc, char **argv) {
 
 	json_object *iterationArray = getIterationArray(root);
 
-	iterateThroughQuarters(USD);
+	iterateThroughQuarters(iterationArray);
 
 	//printf("the object from key %s is: %s\n", key_USD, json_object_get_string(USD));	
 
@@ -30,6 +29,8 @@ json_object* getRootJSON() {
 }
 
 json_object* getIterationArray(json_object *root) {
+
+	json_object *facts, *us_gaap, *netIncomeLoss, *units, *USD; 
 
 	json_object_object_get_ex(root, key_facts, &facts);
 	json_object_object_get_ex(facts, key_us_gaap, &us_gaap);
