@@ -21,7 +21,7 @@ int main(int argc, char **argv) {
 
 json_object* getRootJSON() {
 	char relativePathName[] = "sec-data/companyfacts/CIK0000001750.json";
-	struct json_object *root = json_object_from_file(relativePathName);
+	json_object *root = json_object_from_file(relativePathName);
 	if (!root) {
 	  printf("error, file %s not found\n", relativePathName);
 	  return NULL;
