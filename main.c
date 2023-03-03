@@ -50,29 +50,38 @@ json_object* getIterationArray(json_object *root) {
 void iterateThroughQuarters(json_object *obj) {
 
 
-	json_object *it, *start, *end;
+	json_object *it;
 
-	const char key_start[] = "start";
-	const char key_end[] = "end";
-	
 	int n = json_object_array_length(obj);
+
+	for (int i=0; i<n; i++)
+	{
+	  it = json_object_array_get_idx(obj, i);
+	  bool answer = isQuarter(it);	
+	
+	}
+}
+
+bool isQuarter(json_object *obj) {
+
+	json_object *start, *end;
 
 	struct tm tm_start;
 	struct tm tm_end;
 	char *buf_start;
 	char *buf_end;
 	
-	for (int i=0; i<n; i++)
-	{
-	  it = json_object_array_get_idx(obj, i);
-	  json_object_object_get_ex(it, key_start, &start);
+	const char key_start[] = "start";
+	const char key_end[] = "end";
+	
+	  json_object_object_get_ex(obj, key_start, &start);
 	  buf_start = strdup(json_object_get_string(start));
           strptime(buf_start, "%Y-%m-%d", &tm_start);
 
-	  json_object_object_get_ex(it, key_end, &end);
+	  json_object_object_get_ex(obj, key_end, &end);
 	  buf_end = strdup(json_object_get_string(end));
 	  strptime(buf_end, "%Y-%m-%d", &tm_end);
 
 	  printf("The period starts on %s and ends on %s\n", buf_start, buf_end);
-	}
+	return true;
 }
