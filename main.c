@@ -67,17 +67,20 @@ bool isQuarter(json_object *obj) {
 	json_object *start, *end;
 
 	struct tm tm_start, tm_end;
-	char *buf_start, *buf_end;
 	
 	json_object_object_get_ex(obj, key_start, &start);
-	buf_start = strdup(json_object_get_string(start));
+       	char *buf_start = strdup(json_object_get_string(start));
         strptime(buf_start, "%Y-%m-%d", &tm_start);
+	char test_buffer_start [80];
+	strftime(test_buffer_start,80, "%x",&tm_start);
 
 	json_object_object_get_ex(obj, key_end, &end);
-	buf_end = strdup(json_object_get_string(end));
+	char *buf_end = strdup(json_object_get_string(end));
 	strptime(buf_end, "%Y-%m-%d", &tm_end);
+	char test_buffer_end [80];
+	strftime(test_buffer_end, 80, "%x", &tm_end);
 
-	printf("The period starts on %s and ends on %s\n", buf_start, buf_end);
+	printf("The period starts on %s and ends on %s\n", test_buffer_start, test_buffer_end);
 
 	return true;
 }
