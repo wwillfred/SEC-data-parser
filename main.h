@@ -13,6 +13,9 @@ const char key_netIncomeLoss[] = "NetIncomeLoss";
 const char key_units[] = "units";
 const char key_USD[] = "USD";
 
+const char key_start[] = "start";
+const char key_end[] = "end";
+	
 int main(int argc, char **argv);
 
 json_object* getRootJSON();
