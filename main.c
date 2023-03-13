@@ -1,6 +1,6 @@
 #include "main.h"
 
-int main(int argc, char **argv) {
+int main() {
 
 	json_object *root = getRootJSON();
 	if (!root)
@@ -50,14 +50,14 @@ json_object* getIterationArray(json_object *root) {
 void iterateThroughQuarters(json_object *obj) {
 
 
-	json_object *it;
+	struct json_object *it;
 
-	int n = json_object_array_length(obj);
+	int n = (int)json_object_array_length(obj);
 
 	for (int i=0; i<n; i++)
 	{
-	  it = json_object_array_get_idx(obj, i);
-	  bool answer = isQuarter(it);	
+	  it = json_object_array_get_idx(obj, (size_t) i);
+	  isQuarter(it);	
 	
 	}
 }
@@ -66,21 +66,28 @@ bool isQuarter(json_object *obj) {
 
 	json_object *start, *end;
 
-	struct tm tm_start, tm_end;
+	struct tm tm_start/*, tm_end*/;
 	
 	json_object_object_get_ex(obj, key_start, &start);
        	char *buf_start = strdup(json_object_get_string(start));
         strptime(buf_start, "%Y-%m-%d", &tm_start);
-	char test_buffer_start [80];
-	strftime(test_buffer_start,80, "%x",&tm_start);
+	//time_t start_date = mktime(tm_start);
+	//char test_buffer_start [80];
+	//strftime(test_buffer_start,80, "%x",tm_start);
 
 	json_object_object_get_ex(obj, key_end, &end);
 	char *buf_end = strdup(json_object_get_string(end));
-	strptime(buf_end, "%Y-%m-%d", &tm_end);
-	char test_buffer_end [80];
-	strftime(test_buffer_end, 80, "%x", &tm_end);
+	//strptime(buf_end, "%Y-%m-%d", tm_end);
+	//time_t end_date = mktime(tm_end);
+	//char test_buffer_end [80];
+	//strftime(test_buffer_end, 80, "%x", tm_end);
 
-	printf("The period starts on %s and ends on %s\n", test_buffer_start, test_buffer_end);
+	//double diff_seconds = difftime(end_date, start_date);
+	//int diff_days = diff_seconds / (60*60*24);
+	
+	//printf("Hello");
+	//printf("The number of days of this record's period is %d\n", diff_days);
+	printf("The period starts on %s and ends on %s\n", buf_start, buf_end);
 
 	return true;
 }
