@@ -16,6 +16,8 @@ const char key_USD[] = "USD";
 const char key_start[] = "start";
 const char key_end[] = "end";
 	
+const int maxDaysInQuarter = 100;
+
 int main(int argc, char **argv);
 
 json_object* getRootJSON();
