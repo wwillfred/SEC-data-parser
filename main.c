@@ -65,28 +65,23 @@ void iterateThroughQuarters(json_object *obj) {
 bool isQuarter(json_object *obj) {
 
 	json_object *start, *end;
-
-	struct tm tm_start/*, tm_end*/;
+	struct tm tm_start = {0};
+	struct tm tm_end = {0};
 	
 	json_object_object_get_ex(obj, key_start, &start);
        	char *buf_start = strdup(json_object_get_string(start));
         strptime(buf_start, "%Y-%m-%d", &tm_start);
-	//time_t start_date = mktime(tm_start);
-	//char test_buffer_start [80];
-	//strftime(test_buffer_start,80, "%x",tm_start);
+	time_t start_date = mktime(&tm_start);
 
 	json_object_object_get_ex(obj, key_end, &end);
 	char *buf_end = strdup(json_object_get_string(end));
-	//strptime(buf_end, "%Y-%m-%d", tm_end);
-	//time_t end_date = mktime(tm_end);
-	//char test_buffer_end [80];
-	//strftime(test_buffer_end, 80, "%x", tm_end);
+	strptime(buf_end, "%Y-%m-%d", &tm_end);
+	time_t end_date = mktime(&tm_end);
 
-	//double diff_seconds = difftime(end_date, start_date);
-	//int diff_days = diff_seconds / (60*60*24);
+	double diff_seconds = difftime(end_date, start_date);
+	int diff_days = (int) (diff_seconds / (60*60*24));
 	
-	//printf("Hello");
-	//printf("The number of days of this record's period is %d\n", diff_days);
+	printf("The number of days of this record's period is %d\n", diff_days);
 	printf("The period starts on %s and ends on %s\n", buf_start, buf_end);
 
 	return true;
