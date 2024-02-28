@@ -1,12 +1,25 @@
+/**
+  * @file main.c
+
+  * @note This function currently does not reflect any real program logic; it simply calls functions to test some basic functionality of the json-c package
+  */
 #include "main.h"
+
+/**
+  *  -# Call getParentJSON() to obtain a pointer to the parent JSON object we will parse
+  *  -# Pass the parent JSON object to getIterationArray() to obtain the array through which we will iterate
+  *  -# Passes the iteration array to iterateThroughQuarters()
+  *  -# Clean up
+  *
+  */
 
 int main() {
 
-	json_object *root = getRootJSON();
-	if (!root)
+	json_object *parentJSON= getParentJSON();
+	if (!parentJSON)
 	  return 1;
 
-	json_object *iterationArray = getIterationArray(root);
+	json_object *iterationArray = getIterationArray(parentJSON);
 	if (!iterationArray)
 	  return 1;
 
@@ -14,26 +27,33 @@ int main() {
 
 	//printf("the object from key %s is: %s\n", key_USD, json_object_get_string(USD));	
 
-	json_object_put(root);
+	json_object_put(parentJSON);
 
 	return 0;
 }
 
-json_object* getRootJSON() {
-	char relativePathName[] = "CIK0000056873.json";
-	json_object *root = json_object_from_file(relativePathName);
-	if (!root) {
-	  printf("error, file %s not found\n", relativePathName);
+/**
+  * Call the json_object_from_file() function to turn the JSON file located at JSONRelativePathName into a pointer to a json_object
+  */
+
+json_object* getParentJSON() {
+	json_object *result = json_object_from_file(JSONRelativePathName);
+	if (!result) {
+	  printf("error, file %s not found\n", JSONRelativePathName);
 	  return NULL;
 	}
-	return root;
+	return result;
 }
 
-json_object* getIterationArray(json_object *root) {
+/**
+  *  Traverse @p *parentJSON through facts, us_gaap, netIncomeLoss,and units to find the USD array, through which we can iterate
+  */ 
+
+json_object* getIterationArray(json_object *parentJSON) {
 
 	json_object *facts, *us_gaap, *netIncomeLoss, *units, *USD; 
 
-	json_object_object_get_ex(root, key_facts, &facts);
+	json_object_object_get_ex(parentJSON, key_facts, &facts);
 	json_object_object_get_ex(facts, key_us_gaap, &us_gaap);
 	json_object_object_get_ex(us_gaap, key_netIncomeLoss, &netIncomeLoss);
 	json_object_object_get_ex(netIncomeLoss, key_units, &units);
@@ -47,16 +67,22 @@ json_object* getIterationArray(json_object *root) {
 	return USD;
 }
 
-void iterateThroughQuarters(json_object *obj) {
+/**
+  * -# For every element in @p JSONArray, call daysInPeriod() to find how many days are in the period represented by the element
+  * -# If the number of days is greater than or equal to @c minDaysInQuarter and is less than or equal to @c maxDaysInQuarter then print a confirmation message
+  *   -# Similarly check if the number of days matches the length of a year
+  *   -# Otherwise, print that the period is neither a quarter nor a year
+  */
 
+void iterateThroughQuarters(json_object *JSONArray) {
 
 	struct json_object *it;
 
-	int n = (int)json_object_array_length(obj);
+	int arrayLength = (int)json_object_array_length(JSONArray);
 
-	for (int i=0; i<n; i++)
+	for (int i=0; i<arrayLength; i++)
 	{
-	  it = json_object_array_get_idx(obj, (size_t) i);
+	  it = json_object_array_get_idx(JSONArray, (size_t) i);
 	  int daysInIt = daysInPeriod(it);
  
 	  if ((minDaysInQuarter <= daysInIt) && (daysInIt <= maxDaysInQuarter)) {
@@ -70,6 +96,11 @@ void iterateThroughQuarters(json_object *obj) {
 	  }
 	}
 }
+
+/**
+  * -# Copy the strings referenced by start and end in @p *period and convert them into @c tm structs
+  * -# Calculate the number of seconds between the start and end @c tm structs and convert that to days and return the result
+  */
 
 int daysInPeriod(json_object *period) {
 

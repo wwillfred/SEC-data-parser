@@ -1,10 +1,12 @@
-# SEC data parser
+# Corporate Financials Calculator
 
 This project will perform calculations on the financial information of publicly traded companies. Example calculations will include averaging a company's return on invested capital (ROIC) over a given number of years, screening for companies that have not had an unprofitable quarter in the last given number of years, and calculating a company's price per a given number of years' average Net Income.
 
 Although such a tool will not be able to identify companies worth investing in, the intent is that this project will help the user identify companies worth doing more in-depth research on as potential investment targets.
 
 I'm making this project in C because I want to learn C. I've chosen the [json-c package][json-c] package for parsing SEC data and [SQLite][sqlite] for structuring data for calculations.
+
+This project uses [Doxygen][doxygen] to generate documentation.
 
 Financial information is sourced from [EDGAR APIs][EDGAR_APIs], specifically the "Bulk data" section.
 
@@ -24,6 +26,19 @@ SQLite is included with Mac OS. To confirm you have it installed, run:
 sqlite3
 # ctrl-c twice to exit
 ```
+
+### Doxygen
+To install Doxygen on Mac OS:
+```shell
+brew install doxygen
+```
+
+To generate documentation from the source code:
+```shell
+doxygen Doxyfile
+```
+To view the generated documentation, open `html/index.html` in a web browser.
+
 
 ## Compiling
 Use the `-ljson-c` and `-lsqlite3` flags when compiling with `gcc`:
@@ -61,4 +76,5 @@ clang: error: linker command failed with exit code 1`, first run `brew uninstall
 [json-c]: https://github.com/json-c/json-c
 [json-c_homebrew]: https://formulae.brew.sh/formula/json-c
 [sqlite]: https://www.sqlite.org/index.html
+[doxygen]: https://www.doxygen.nl/
 [EDGAR_APIs]: https://www.sec.gov/edgar/sec-api-documentation

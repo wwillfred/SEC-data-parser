@@ -8,6 +8,9 @@ sqlite-test/
 .DS_Store
 *.swp
 
+# Doxygen output
+html/
+latex/
 # Prerequisites
 *.d
 
