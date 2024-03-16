@@ -43,12 +43,12 @@ To view the generated documentation, open `html/index.html` in a web browser.
 ## Compiling
 Use the `-ljson-c` and `-lsqlite3` flags when compiling with `gcc`:
 ```shell
-gcc -o fdg main.c -ljson-c -lsqlite3
+gcc -o fdg json-c_sec.c main.c -ljson-c -lsqlite3
 ```
 
 ...or, if you want the compiler to show all warnings:
 ```shell
-gcc -o fdg main.c -ljson-c -lsqlite3 -Wshadow -Wwrite-strings -Wextra -Wconversion -std=c11 -pedantic
+gcc -o fdg json-c_sec.c main.c -ljson-c -lsqlite3 -Wshadow -Wwrite-strings -Wextra -Wconversion -std=c11 -pedantic
 ```
 If you get the error `ld: library not found for -ljsonc
 clang: error: linker command failed with exit code 1`, first run `brew uninstall json-c` then `brew install json-c` again
