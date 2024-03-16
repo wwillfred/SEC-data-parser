@@ -1,3 +1,8 @@
+## Feature branch sqlite_ni
+The purpose of this branch is to:
+- Create a SQLite database if it doesn't exist
+- Populate the database with the Net Income values for every quarter from the test JSON file
+
 # Corporate Financials Calculator
 
 This project will perform calculations on the financial information of publicly traded companies. Example calculations will include averaging a company's return on invested capital (ROIC) over a given number of years, screening for companies that have not had an unprofitable quarter in the last given number of years, and calculating a company's price per a given number of years' average Net Income.
@@ -55,7 +60,7 @@ clang: error: linker command failed with exit code 1`, first run `brew uninstall
 
 ## Version schedule
 + **v1.0.0**
-   + Builds database of basic line items (i.e., those used in personal financial research) of all companies from SEC data
+   + Builds database of required line items of all companies in SEC data
    + Calculations
       + Provides summary of any given company
          + 10- and 20-year average and median ROIC
