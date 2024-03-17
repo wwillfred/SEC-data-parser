@@ -9,6 +9,7 @@
 #include <string.h>
 #include <time.h>
 #include "json-c_sec.h"
+#include "sqlite_financials.h"
 
 
 static const char* const JSONRelativePathName = "CIK0000056873.json"; ///< JSON file of a single company's financial statements we're using to test and build the project

@@ -15,6 +15,7 @@
 
 int main() {
 
+/*
 	json_object *parentJSON= readJSONFile(JSONRelativePathName);
 	if (!parentJSON)
 	  return 1;
@@ -28,7 +29,9 @@ int main() {
 	//printf("the object from key %s is: %s\n", key_USD, json_object_get_string(USD));	
 
 	json_object_put(parentJSON);
+*/
 
+	version();
 	return 0;
 }
 
