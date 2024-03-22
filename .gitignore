@@ -3,6 +3,7 @@ fdg
 mdb-test/
 sqlite-test/
 *.json
+*.db
 
 #Specific for Mac OS
 .DS_Store
