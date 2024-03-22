@@ -15,7 +15,6 @@
 
 int main() {
 
-/*
 	json_object *parentJSON= readJSONFile(JSONRelativePathName);
 	if (!parentJSON)
 	  return 1;
@@ -24,14 +23,20 @@ int main() {
 	if (!iterationArray)
 	  return 1;
 
-	iterateThroughQuarters(iterationArray);
+	open_database();
+
+	//iterateThroughQuarters(iterationArray);
 
 	//printf("the object from key %s is: %s\n", key_USD, json_object_get_string(USD));	
 
 	json_object_put(parentJSON);
-*/
 
-	version();
+	add_net_income(2023, 1, 40000);
+
+	print_quarter(2023, 1);
+
+	close_database();
+
 	return 0;
 }
 
